@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-importttt {
+import {
   Colors,
   DebugInstructions,
   Header,
