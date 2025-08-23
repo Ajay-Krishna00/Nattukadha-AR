@@ -44,8 +44,8 @@ const InitialScene = (props) => {
 
   const [position, setPosition] = useState([0, 0, -0.5]);
   const [rotation, setRotation] = useState([0, 30, 0]);
-  const [avocadoScale, setAvocadoScale] = useState([0.2, 0.2, 0.2]);
-  const [rabbitScale, setRabbitScale] = useState([0.001, 0.001, 0.001]);
+  // const [avocadoScale, setAvocadoScale] = useState([0.2, 0.2, 0.2]);
+  // const [rabbitScale, setRabbitScale] = useState([0.001, 0.001, 0.001]);
 
   const changePos = (newPosition) => {
     setPosition(newPosition);
@@ -58,46 +58,46 @@ const InitialScene = (props) => {
     }
   };
 
-  const changeScaleAvocado = (pinchState, scaleFactor, source) => {
-    if (pinchState === 3) {
-      let currScale = [avocadoScale[0] * scaleFactor, avocadoScale[1] * scaleFactor, avocadoScale[2] * scaleFactor];
-      setAvocadoScale(currScale);
-    }
-  };
+  // const changeScaleAvocado = (pinchState, scaleFactor, source) => {
+  //   if (pinchState === 3) {
+  //     let currScale = [avocadoScale[0] * scaleFactor, avocadoScale[1] * scaleFactor, avocadoScale[2] * scaleFactor];
+  //     setAvocadoScale(currScale);
+  //   }
+  // };
 
-  const changeScaleRabbit = (pinchState, scaleFactor, source) => {
-    if (pinchState === 3) {
-      let currScale = [rabbitScale[0] * scaleFactor, rabbitScale[1] * scaleFactor, rabbitScale[2] * scaleFactor];
-      setRabbitScale(currScale);
-    }
-  };
+  // const changeScaleRabbit = (pinchState, scaleFactor, source) => {
+  //   if (pinchState === 3) {
+  //     let currScale = [rabbitScale[0] * scaleFactor, rabbitScale[1] * scaleFactor, rabbitScale[2] * scaleFactor];
+  //     setRabbitScale(currScale);
+  //   }
+  // };
 
-  const anchor = () => {
-    console.log("image found!");
-  }
+  // const anchor = () => {
+  //   console.log("image found!");
+  // }
 
-  ViroARTrackingTargets.createTargets({
-    image: {
-      source: require("./assets/skull.jpg"),
-      orientation: "Up",
-      physicalWidth: 0.165, // real world width in meters
-    }
-  })
+  // ViroARTrackingTargets.createTargets({
+  //   image: {
+  //     source: require("./assets/skull.jpg"),
+  //     orientation: "Up",
+  //     physicalWidth: 0.165, // real world width in meters
+  //   }
+  // })
 
-  ViroMaterials.createMaterials({
-    wood: {
-      diffuseTexture: require("./assets/side.png"),
-    },
-  });
-  ViroAnimations.registerAnimations({
-    rotate: {
-      duration: 2000,
-      properties: {
-        rotateY: "+=90",
-        rotateX: "+=90",
-      },
-    },
-  });
+  // ViroMaterials.createMaterials({
+  //   wood: {
+  //     diffuseTexture: require("./assets/side.png"),
+  //   },
+  // });
+  // ViroAnimations.registerAnimations({
+  //   rotate: {
+  //     duration: 2000,
+  //     properties: {
+  //       rotateY: "+=90",
+  //       rotateX: "+=90",
+  //     },
+  //   },
+  // });
   return (
     <ViroARScene>
       {/* <ViroBox
@@ -119,36 +119,57 @@ const InitialScene = (props) => {
 
       {/* <ViroARImageMarker target="image" onAnchorFound={anchor}> */}
       <ViroAmbientLight color="#ffffff" />
-      {data.object === "Rabbit" ? (
-        <Viro3DObject
-          source={require("./assets/Rabbit/Rabbit_01(1).obj")}
-          position={position}
-          scale={rabbitScale}
-          rotation={rotation}
-          type="OBJ"
-          onDrag={changePos}
-          onRotate={changeRot}
-          onPinch={changeScaleRabbit}
-        />
-      ) : (
-        <Viro3DObject
-          source={require("./assets/kadakali1/output.obj")}
-          position={position}
-          scale={avocadoScale}
-          rotation={rotation}
-          type="OBJ"
-          onDrag={changePos}
-          onRotate={changeRot}
-          onPinch={changeScaleAvocado}
-        />
-        )}
-        {/* </ViroARImageMarker> */}
+
+{(() => {
+  if (data.object === "Kathakali") {
+    return (
+      <Viro3DObject
+        source={require("./assets/kadakali1/output.obj")}
+        resources={[require("./assets/kadakali1/output1.mtl"),require("./assets/kadakali1/textured_mesh_metallic.jpg-textured_mesh_roughness.png"),require("./assets/kadakali1/textured_mesh.jpg")]}
+        position={position}
+        scale={[0.15, 0.15, 0.15]}
+        rotation={rotation}
+        type="OBJ"
+        onDrag={changePos}
+        onRotate={changeRot}
+      />
+    );
+  } else if (data.object === "Theyyam") {
+    return (
+      <Viro3DObject
+        source={require("./assets/theyy/output.obj")}
+          resources={[require("./assets/theyy/output2.mtl"),require("./assets/theyy/textured_mesh_metallic.jpg-textured_mesh_roughness.png"),require("./assets/theyy/textured_mesh.jpg")]}
+        position={position}
+        scale={[0.15, 0.15, 0.15]}
+        rotation={rotation}
+        type="OBJ"
+        onDrag={changePos}
+        onRotate={changeRot}
+      />
+    );
+  } else {
+    return (
+      <Viro3DObject
+        source={require("./assets/jatayu/output.obj")}
+        resources={[require("./assets/jatayu/output0.mtl"),require("./assets/jatayu/textured_mesh_metallic.jpg-textured_mesh_roughness.png"),require("./assets/jatayu/textured_mesh.jpg")]}
+        position={position}
+        scale={[0.2, 0.2, 0.2]}
+        rotation={rotation}
+        type="OBJ"
+        onDrag={changePos}
+        onRotate={changeRot}
+      />
+    );
+  }
+  return null;
+})()}
+
     </ViroARScene>
   );
 };
 
 export default () => {
-  const [select, setSelect] = useState("Avocado");
+  const [select, setSelect] = useState("Kathakali");
   return (
     <View style={{ flex: 1, backgroundColor: "#000000" }}>
       <ViroARSceneNavigator
@@ -162,12 +183,15 @@ export default () => {
       <View style={styles.bar}>
         <TouchableOpacity
           style={styles.av}
-          onPress={() => setSelect("Avocado")}
+          onPress={() => setSelect("Kathakali")}
         >
-          <Text style={styles.text}>Avocado</Text>
+          <Text style={styles.text}>Kathakali</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.rb} onPress={() => setSelect("Rabbit")}>
-          <Text style={styles.text}>Rabbit</Text>
+        <TouchableOpacity style={styles.rb} onPress={() => setSelect("Theyyam")}>
+          <Text style={styles.text}>Theyyam</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.rb} onPress={() => setSelect("JatayuRock")}>
+          <Text style={styles.text}>Jatayu Rock</Text>
         </TouchableOpacity>
       </View>
     </View>
