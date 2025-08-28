@@ -124,10 +124,13 @@ const InitialScene = (props) => {
   if (data.object === "Kathakali") {
     return (
       <Viro3DObject
-        source={require("./assets/kadakali1/output.obj")}
-        resources={[require("./assets/kadakali1/output1.mtl"),require("./assets/kadakali1/textured_mesh_metallic.jpg-textured_mesh_roughness.png"),require("./assets/kadakali1/textured_mesh.jpg")]}
+        source={require("./assets/kadakali1/assets_kadakali_output_obj.obj")}
+        resources={[
+          require("./assets/kadakali1/assets_kadakali_output_mtl.mtl"),
+          require("./assets/kadakali1/textured_mesh.jpg")
+        ]}
         position={position}
-        scale={[0.15, 0.15, 0.15]}
+        scale={[0.2, 0.2, 0.2]}
         rotation={rotation}
         type="OBJ"
         onDrag={changePos}
@@ -137,10 +140,13 @@ const InitialScene = (props) => {
   } else if (data.object === "Theyyam") {
     return (
       <Viro3DObject
-        source={require("./assets/theyy/output.obj")}
-          resources={[require("./assets/theyy/output2.mtl"),require("./assets/theyy/textured_mesh_metallic.jpg-textured_mesh_roughness.png"),require("./assets/theyy/textured_mesh.jpg")]}
+        source={require("./assets/theyy/assets_theyy_output_obj.obj")}
+        resources={[
+          require("./assets/theyy/assets_theyy_output_mtl.mtl"),
+          require("./assets/theyy/textured_mesh.jpg")
+        ]}
         position={position}
-        scale={[0.15, 0.15, 0.15]}
+        scale={[0.2, 0.2, 0.2]}
         rotation={rotation}
         type="OBJ"
         onDrag={changePos}
@@ -150,10 +156,13 @@ const InitialScene = (props) => {
   } else {
     return (
       <Viro3DObject
-        source={require("./assets/jatayu/output.obj")}
-        resources={[require("./assets/jatayu/output0.mtl"),require("./assets/jatayu/textured_mesh_metallic.jpg-textured_mesh_roughness.png"),require("./assets/jatayu/textured_mesh.jpg")]}
+        source={require("./assets/jatayu/assets_jatayu_output_obj.obj")}
+        resources={[
+          require("./assets/jatayu/assets_jatayu_output_mtl.mtl"),
+          require("./assets/jatayu/textured_mesh.jpg")
+        ]}
         position={position}
-        scale={[0.2, 0.2, 0.2]}
+        scale={[0.3, 0.3, 0.3]}
         rotation={rotation}
         type="OBJ"
         onDrag={changePos}
@@ -190,7 +199,7 @@ export default () => {
         <TouchableOpacity style={styles.rb} onPress={() => setSelect("Theyyam")}>
           <Text style={styles.text}>Theyyam</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.rb} onPress={() => setSelect("JatayuRock")}>
+        <TouchableOpacity style={styles.jatayu} onPress={() => setSelect("JatayuRock")}>
           <Text style={styles.text}>Jatayu Rock</Text>
         </TouchableOpacity>
       </View>
@@ -216,17 +225,23 @@ var styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#000000",
   },
   av: {
     marginTop: 10,
-    backgroundColor: "#ffcc00",
+    backgroundColor: "#008000",
+    padding: 10,
+    borderRadius: 5,
+  },
+  jatayu: {
+    marginTop: 10,
+    backgroundColor: "#00ccff",
     padding: 10,
     borderRadius: 5,
   },
   rb: {
     marginTop: 10,
-    backgroundColor: "#00ccff",
+    backgroundColor: "#ff6600",
     padding: 10,
     borderRadius: 5,
   },
